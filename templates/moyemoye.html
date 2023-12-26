@@ -6,14 +6,46 @@
     <title>MOYE MOYE</title>
     <link rel="icon" href="/static/favicon.ico" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      .normal-cursor {
+        cursor: url("/static/cursor.png"), auto;
+      }
+
+      .pointer {
+        cursor: url("/static/cursor-click.png"), auto;
+      }
+    </style>
+    <script>
+      const productDialog = document.getElementById("productDialog");
+      const productDialogTitle = document.getElementById("productDialogTitle");
+      const productDialogDescription = document.getElementById(
+        "productDialogDescription"
+      );
+      const closeDialogButton = document.getElementById("closeDialogButton");
+
+      // Function to open the dialog
+      function openProductDialog(name, description) {
+        productDialogTitle.textContent = name;
+        productDialogDescription.textContent = description;
+        productDialog.showModal();
+      }
+
+      // Function to close the dialog
+      function closeProductDialog() {
+        productDialog.close();
+      }
+
+      // Event listener for the close button
+      closeDialogButton.addEventListener("click", closeProductDialog);
+    </script>
   </head>
-  <body>
+  <body class="normal-cursor">
     <nav class="p-1 fixed top-3 w-full z-10">
       <div class="mx-4 bg-stone-200 rounded-xl border-4 border-gray-800">
-        <div class="container mx-auto flex items-center justify-between">
+        <div class="flex items-center justify-between">
           <div class="flex space-x-4 items-center">
             <!-- Container 1 -->
-            <div class="text-white  rounded-md">
+            <div class="text-white rounded-md">
               <!-- Logo -->
               <div class="logo md:hidden p-1">
                 <svg
@@ -37,10 +69,11 @@
                   />
                   <rect y="5" width="22" height="6" rx="1" fill="#1E1E1E" />
                 </svg>
-
               </div>
-              <div class="hidden md:flex space-x-4 pl-4">
-                <div class="logo">
+              <div
+                class="hidden md:flex space-x-4 pl-4 font-['Roboto Mono'] font-bold"
+              >
+                <div class="logo pointer">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="22"
@@ -62,19 +95,34 @@
                     />
                     <rect y="5" width="22" height="6" rx="1" fill="#1E1E1E" />
                   </svg>
-  
                 </div>
-                <a href="#" class="text-black hover:underline">Home</a>
-                <a href="#" class="text-black hover:underline">About</a>
-                <a href="#" class="text-black hover:underline">Blog</a>
-                <a href="#" class="text-black hover:underline">Projects</a>
+                <a href="#"class="pointer text-black hover:underline" onclick="openProductDialog('{{ item.name }}', '{{ item.description }}')">Home</a>
+                <a href="#" class="pointer text-black hover:underline">About</a>
+                <a href="#" class="pointer text-black hover:underline">Blog</a>
+                <a href="#" class="pointer text-black hover:underline">Projects</a
+                >
               </div>
             </div>
           </div>
 
+          <dialog id="productDialog" class="rounded-md bg-white p-4">
+            <h2 class="text-lg font-semibold mb-2" id="productDialogTitle"></h2>
+            <p class="text-gray-600 mb-4" id="productDialogDescription"></p>
+            <button
+              id="closeDialogButton"
+              class="bg-blue-500 text-white px-4 py-2 rounded-full"
+            >
+              Close
+            </button>
+          </dialog>
+
           <!-- Container 2 -->
           <div class="rounded-md">
-            <div class="w-[109px] h-8 text-center text-neutral-800 flex items-center justify-center text-base font-bold font-['Roboto Mono'] leading-[15px]">/home/fun</div>
+            <div
+              class="w-[109px] h-8 text-center text-neutral-800 flex items-center justify-center text-base font-bold font-['Roboto Mono'] leading-[15px]"
+            >
+              /home/fun
+            </div>
           </div>
 
           <!-- Container 3 -->
@@ -82,12 +130,12 @@
             <div
               class="w-[180px] h-8 text-center flex items-center justify-center text-neutral-800 text-sm font-bold font-['Roboto Mono'] leading-3"
             >
-              Sat Oct 16 11:28 AM
+              {{date}}{{time}}
             </div>
           </div>
 
           <!-- Responsive Menu (Hidden on Larger Screens) -->
-          <div class="md:hidden pt-[8px] pr-1"2222>
+          <div class="md:hidden pt-[8px] pr-1">
             <button id="menu-toggle" class="text-black">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -133,45 +181,91 @@
     ></div>
 
     <div class="flex">
-      <div class="w-11/12 h-screen fixed top-14 gap-44 left-0 text-neutral-800 text-center flex flex-col">
+      <div
+        class="w-11/12 h-screen fixed top-14 gap-44 left-0 text-neutral-800 text-center flex flex-col"
+      >
         <p>Main Content</p>
       </div>
-  
+
       <!-- Sidebar -->
-      <div class="w-1/12 h-screen bg-gray-200 fixed top-14 right-0 text-neutral-800 text-center flex flex-col">
-        <div class="topsidebar h-4/6 bg-red-200 space-y-2 flex flex-col items-center justify-start">
-          <div class="w-[75px] h-[105px] scale-50 md:scale-75 space-y-2 mt-4 relative">
-            <img class="w-[73px] h-[73px] left-0 top-0 absolute " src="/static/mysite/desktop.png" />
-            <div class="w-[73px] h-6 left-[2px] top-[81px] absolute text-center text-[17px] font-bold font-['Roboto Mono'] leading-3">Desktop</div>
+      <div
+        class="w-1/12 h-screen fixed top-14 right-0 text-neutral-800 text-center flex flex-col"
+      >
+        <div
+          class="topsidebar h-4/6 space-y-2 flex flex-col items-center justify-start"
+        >
+          <div
+            class="w-[75px] h-[105px] scale-50 md:scale-75 space-y-2 mt-4 relative"
+          >
+            <img
+              class="pointer w-[73px] h-[73px] left-0 top-0 absolute"
+              src="/static/mysite/desktop.png"
+            />
+            <div
+              class="pointer w-[73px] h-6 left-[2px] top-[81px] absolute text-center text-[17px] font-bold font-['Roboto Mono'] leading-3"
+            >
+              Desktop
+            </div>
           </div>
-        
-          <div class="w-[94px] h-[105px] scale-50 md:scale-75  space-y-2 relative">
-            <img class="w-[81px] h-[73px] left-[5px] top-0 absolute" src="/static/mysite/folder.png" />
-            <div class="w-[94px] h-6 left-[2.5px] top-[81px] absolute text-center text-stone-900 text-[17px] font-bold font-['Roboto Mono'] leading-3">Downloads</div>
+
+          <div
+            class="w-[94px] h-[105px] scale-50 md:scale-75 space-y-2 relative"
+          >
+            <img
+              class="pointer w-[81px] h-[73px] left-[5px] top-0 absolute"
+              src="/static/mysite/folder.png"
+            />
+            <div
+              class="pointer w-[94px] h-6 left-[2.5px] top-[81px] absolute text-center text-stone-900 text-[17px] font-bold font-['Roboto Mono'] leading-3"
+            >
+              Downloads
+            </div>
           </div>
-  
-          <div class="w-[87px] h-[105px] scale-50 md:scale-75  space-y-2 relative">
-            <img class="w-[60px] h-[73px] left-[11px] top-0 absolute" src="/static/mysite/internet.png" />
-            <div class="w-[87px] h-6 left-0 top-[81px] absolute text-center text-stone-900 text-[17px] font-bold font-['Roboto Mono'] leading-3">Internet</div>
+
+          <div
+            class="w-[87px] h-[105px] scale-50 md:scale-75 space-y-2 relative"
+          >
+            <img
+              class="pointer w-[60px] h-[73px] left-[11px] top-0 absolute"
+              src="/static/mysite/internet.png"
+            />
+            <div
+              class="pointer w-[87px] h-6 left-0 top-[81px] absolute text-center text-stone-900 text-[17px] font-bold font-['Roboto Mono'] leading-3"
+            >
+              Internet
+            </div>
           </div>
-  
-          <div class="w-[87px] h-[97px] scale-50 md:scale-75 space-y-2 relative">
-            <img class="w-[65px] h-[65px] left-[10px] top-[5px] absolute" src="/static/mysite/music.png" />
-            <div class="w-[87px] h-6 left-0 top-[81px] absolute text-center text-stone-900 text-[17px] font-bold font-['Roboto Mono'] leading-3">Music</div>
+
+          <div
+            class="w-[87px] h-[97px] scale-50 md:scale-75 space-y-2 relative"
+          >
+            <img
+              class="pointer w-[65px] h-[65px] left-[10px] top-[5px] absolute"
+              src="/static/mysite/music.png"
+            />
+            <div
+              class="pointer w-[87px] h-6 left-0 top-[81px] absolute text-center text-stone-900 text-[17px] font-bold font-['Roboto Mono'] leading-3"
+            >
+              Music
+            </div>
           </div>
         </div>
 
-        <div class="bottomsidebar h-1/4 bg-blue-300 flex flex-col items-center justify-end ">
-          <div class="w-[73px] h-[104px] space-y-2 scale-50 md:scale-75 relative mb-3">
-            <img class="w-[67px] h-[74px] left-0 top-0 absolute" src="/static/mysite/trashbin.png" />
-            <div class="w-[73px] h-6 left-0 top-[80px] absolute text-center text-stone-900 text-[17px] font-bold font-['Roboto Mono'] leading-3">My Life</div>
+        <div class="bottomsidebar h-1/4 flex flex-col items-center justify-end">
+          <div
+            class="w-[73px] h-[104px] space-y-2 scale-50 md:scale-75 relative mb-3"
+          >
+            <img
+              class="pointer w-[67px] h-[74px] left-0 top-0 absolute"
+              src="/static/mysite/trashbin.png"
+            />
+            <div
+              class="pointer w-[73px] h-6 left-0 top-[80px] absolute text-center text-stone-900 text-[17px] font-bold font-['Roboto Mono'] leading-3"
+            >
+              My Life
+            </div>
           </div>
         </div>
-
-
-
-        
-        
       </div>
     </div>
 
