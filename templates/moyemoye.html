@@ -15,29 +15,7 @@
         cursor: url("/static/cursor-click.png"), auto;
       }
     </style>
-    <script>
-      const productDialog = document.getElementById("productDialog");
-      const productDialogTitle = document.getElementById("productDialogTitle");
-      const productDialogDescription = document.getElementById(
-        "productDialogDescription"
-      );
-      const closeDialogButton = document.getElementById("closeDialogButton");
-
-      // Function to open the dialog
-      function openProductDialog(name, description) {
-        productDialogTitle.textContent = name;
-        productDialogDescription.textContent = description;
-        productDialog.showModal();
-      }
-
-      // Function to close the dialog
-      function closeProductDialog() {
-        productDialog.close();
-      }
-
-      // Event listener for the close button
-      closeDialogButton.addEventListener("click", closeProductDialog);
-    </script>
+    
   </head>
   <body class="normal-cursor">
     <nav class="p-1 fixed top-3 w-full z-10">
@@ -96,11 +74,10 @@
                     <rect y="5" width="22" height="6" rx="1" fill="#1E1E1E" />
                   </svg>
                 </div>
-                <a href="#"class="pointer text-black hover:underline" onclick="openProductDialog('{{ item.name }}', '{{ item.description }}')">Home</a>
+                <a href="{{url_for('home')}}"class="pointer text-black hover:underline">Home</a>
                 <a href="#" class="pointer text-black hover:underline">About</a>
                 <a href="#" class="pointer text-black hover:underline">Blog</a>
-                <a href="#" class="pointer text-black hover:underline">Projects</a
-                >
+                <a href="#" class="pointer text-black hover:underline">Projects</a>
               </div>
             </div>
           </div>
@@ -184,7 +161,8 @@
       <div
         class="w-11/12 h-screen fixed top-14 gap-44 left-0 text-neutral-800 text-center flex flex-col"
       >
-        <p>Main Content</p>
+        {% block content %}
+        {% endblock content%}
       </div>
 
       <!-- Sidebar -->

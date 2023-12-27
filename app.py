@@ -12,5 +12,9 @@ def hello():
     return render_template("moyemoye.html",time=current_time, date=current_date)
 
 
+@app.route("/home")
+def home():
+    return render_template("whttf.html")
+
 if __name__ == "__main__":
     app.run(debug=True)
