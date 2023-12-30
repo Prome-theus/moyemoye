@@ -1,11 +1,195 @@
-{% extends "moyemoye.html" %}
-{% block content %}
+{% extends "moyemoye.html" %} {% block content %}
 
-<h1>moye moye </h1>
-
-
+<div class="flex item-center justify-center py-10">
+  <div class="w-[450px] h-[50px] relative scale-0.5">
+    <div class="w-[450px] h-[749px] left-0 top-[-1px] absolute">
+      <img
+        class="w-[450px] h-[749px] left-0 top-0 absolute rounded-[14px] border-4 border-black"
+        src="/static/mysite/bg.png"
+      />
+      <div
+        class="w-[381px] h-[234.74px] left-[26px] top-[239px] absolute justify-center items-center inline-flex"
+      >
+        <div
+          class="w-[381px] h-[234.74px] relative bg-[#F1EBDD] rounded-[14px] drop-shadow-[12px_10px_0px_rgba(0,0,0,1)]"
+        >
+          <div
+            class="w-[381px] h-[234.74px] left-0 top-0 absolute bg-[#F1EBDD]-200 rounded-[14px] shadow border-4 border-black"
+          ></div>
+          <div
+            class="w-[156px] h-[42px] left-[112px] top-[101px] absolute text-center text-stone-900 text-[19px] font-bold font-['Roboto Mono'] leading-3 tracking-wide"
+          >
+            Me
+          </div>
+          <div
+            class="w-[156px] h-[35px] left-[112px] top-[37px] absolute text-center"
+          >
+            <span
+              class="text-stone-900 text-[27px] font-bold font-['Roboto Mono'] leading-3 tracking-wide"
+              >Welcome !</span
+            >
+          </div>
+          <div class="w-[87px] h-[41px] left-[146px] top-[167px] absolute">
+            <div
+              class="w-[87px] h-[41px] left-0 top-0 absolute bg-[#F1EBDD]-200 rounded-[14px] shadow border-4 border-black"
+            ></div>
+            <button
+              class="pointer w-[75px] h-3 left-[6px] top-[14px] absolute text-center text-stone-900 text-sm font-bold font-['Roboto Mono'] leading-3 tracking-wide"
+            >
+              @Dev.to
+            </button>
+          </div>
+          <div class="w-[87px] h-[41px] left-[42px] top-[167px] absolute">
+            <div
+              class="w-[87px] h-[41px] left-0 top-0 absolute bg-[#F1EBDD]-200 rounded-[14px] shadow border-4 border-black"
+            ></div>
+            <button
+              class="pointer w-[75px] h-3 left-[6px] top-[14px] absolute text-center text-stone-900 text-sm font-bold font-['Roboto Mono'] leading-3 tracking-wide"
+            >
+              @Github
+            </button>
+          </div>
+          <div class="w-[87px] h-[41px] left-[250px] top-[167px] absolute">
+            <div
+              class="w-[87px] h-[41px] left-0 top-0 absolute bg-[#F1EBDD]-200 rounded-[14px] shadow border-4 border-black"
+            ></div>
+            <button
+              class="pointer w-[75px] h-3 left-[6px] top-[14px] absolute text-center text-stone-900 text-sm font-bold font-['Roboto Mono'] leading-3 tracking-wide"
+            >
+              @Linkdin
+            </button>
+          </div>
+        </div>
+      </div>
+      <div
+        class="w-[372px] h-[73px] left-[30px] top-[119px] absolute justify-center items-center inline-flex bg-[#F1EBDD] rounded-[14px] drop-shadow-[12px_10px_0px_rgba(0,0,0,1)]"
+      >
+        <div class="w-[372px] h-[73px] relative">
+          <div
+            class="w-[372px] h-[73px] left-0 top-0 absolute bg-[#F1EBDD]-200 rounded-[14px] shadow border-4 border-black"
+          ></div>
+          <div
+            class="w-[106px] h-[26px] left-[19px] top-[30px] absolute text-center text-stone-900 text-[17px] font-bold font-['Roboto Mono'] leading-3 tracking-wide"
+          >
+            Search...
+          </div>
+        </div>
+      </div>
+      <div
+        class="w-[381px] h-[92.42px] left-[26px] top-[546px] absolute justify-center items-center inline-flex"
+      >
+        <div
+          class="w-[381px] h-[92.42px] bg-[#F1EBDD]-200 rounded-[14px] flex justify-evenly items-center shadow border-4 border-black bg-[#F1EBDD] rounded-[14px] drop-shadow-[12px_10px_0px_rgba(0,0,0,1)]"
+        >
+          
+            <svg
+              width="55px"
+              height="55px"
+              viewBox="0 0 24 24"
+              fill="none"
+              class="pointer"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g
+                id="SVGRepo_tracerCarrier"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></g>
+              <g id="SVGRepo_iconCarrier">
+                <path
+                  d="M18.72 3.99997H5.37C5.19793 3.99191 5.02595 4.01786 4.86392 4.07635C4.70189 4.13484 4.55299 4.22471 4.42573 4.34081C4.29848 4.45692 4.19537 4.59699 4.12232 4.75299C4.04927 4.909 4.0077 5.07788 4 5.24997V18.63C4.01008 18.9901 4.15766 19.3328 4.41243 19.5875C4.6672 19.8423 5.00984 19.9899 5.37 20H18.72C19.0701 19.9844 19.4002 19.8322 19.6395 19.5761C19.8788 19.32 20.0082 18.9804 20 18.63V5.24997C20.0029 5.08247 19.9715 4.91616 19.9078 4.76122C19.8441 4.60629 19.7494 4.466 19.6295 4.34895C19.5097 4.23191 19.3672 4.14059 19.2108 4.08058C19.0544 4.02057 18.8874 3.99314 18.72 3.99997ZM9 17.34H6.67V10.21H9V17.34ZM7.89 9.12997C7.72741 9.13564 7.5654 9.10762 7.41416 9.04768C7.26291 8.98774 7.12569 8.89717 7.01113 8.78166C6.89656 8.66615 6.80711 8.5282 6.74841 8.37647C6.6897 8.22474 6.66301 8.06251 6.67 7.89997C6.66281 7.73567 6.69004 7.57169 6.74995 7.41854C6.80986 7.26538 6.90112 7.12644 7.01787 7.01063C7.13463 6.89481 7.2743 6.80468 7.42793 6.74602C7.58157 6.68735 7.74577 6.66145 7.91 6.66997C8.07259 6.66431 8.2346 6.69232 8.38584 6.75226C8.53709 6.8122 8.67431 6.90277 8.78887 7.01828C8.90344 7.13379 8.99289 7.27174 9.05159 7.42347C9.1103 7.5752 9.13699 7.73743 9.13 7.89997C9.13719 8.06427 9.10996 8.22825 9.05005 8.3814C8.99014 8.53456 8.89888 8.6735 8.78213 8.78931C8.66537 8.90513 8.5257 8.99526 8.37207 9.05392C8.21843 9.11259 8.05423 9.13849 7.89 9.12997ZM17.34 17.34H15V13.44C15 12.51 14.67 11.87 13.84 11.87C13.5822 11.8722 13.3313 11.9541 13.1219 12.1045C12.9124 12.2549 12.7546 12.4664 12.67 12.71C12.605 12.8926 12.5778 13.0865 12.59 13.28V17.34H10.29V10.21H12.59V11.21C12.7945 10.8343 13.0988 10.5225 13.4694 10.3089C13.84 10.0954 14.2624 9.98848 14.69 9.99997C16.2 9.99997 17.34 11 17.34 13.13V17.34Z"
+                  fill="#000000"
+                ></path>
+              </g>
+            </svg>
+            <svg
+              width="50px"
+              height="50px"
+              viewBox="0 0 24 24"
+              class="pointer"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g
+                id="SVGRepo_tracerCarrier"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></g>
+              <g id="SVGRepo_iconCarrier">
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M20.9992 5.95846C21.0087 6.565 20.9333 7.32649 20.8658 7.8807C20.8395 8.09686 20.8037 8.27676 20.7653 8.42453C21.6227 10.01 22 11.9174 22 14C22 16.4684 20.8127 18.501 18.9638 19.8871C17.1319 21.2605 14.6606 22 12 22C9.33939 22 6.86809 21.2605 5.0362 19.8871C3.18727 18.501 2 16.4684 2 14C2 11.9174 2.37732 10.01 3.23472 8.42452C3.19631 8.27676 3.16055 8.09685 3.13422 7.8807C3.06673 7.32649 2.99133 6.565 3.00081 5.95846C3.01149 5.27506 3.10082 4.5917 3.19988 3.91379C3.24569 3.60028 3.31843 3.30547 3.65883 3.11917C4.00655 2.92886 4.37274 2.99981 4.73398 3.1021C5.95247 3.44713 7.09487 3.93108 8.16803 4.51287C9.2995 4.17287 10.5783 4 12 4C13.4217 4 14.7005 4.17287 15.832 4.51287C16.9051 3.93108 18.0475 3.44713 19.266 3.1021C19.6273 2.99981 19.9935 2.92886 20.3412 3.11917C20.6816 3.30547 20.7543 3.60028 20.8001 3.91379C20.8992 4.5917 20.9885 5.27506 20.9992 5.95846ZM20 14C20 12.3128 19.6122 10 17.5 10C16.5478 10 15.6474 10.2502 14.7474 10.5004C13.8482 10.7502 12.9495 11 12 11C11.0505 11 10.1518 10.7502 9.25263 10.5004C8.35261 10.2502 7.45216 10 6.5 10C4.39379 10 4 12.3197 4 14C4 15.7636 4.82745 17.231 6.23588 18.2869C7.66135 19.3556 9.69005 20 12 20C14.3099 20 16.3386 19.3555 17.7641 18.2869C19.1726 17.231 20 15.7636 20 14ZM10 14.5C10 15.8807 9.32843 17 8.5 17C7.67157 17 7 15.8807 7 14.5C7 13.1193 7.67157 12 8.5 12C9.32843 12 10 13.1193 10 14.5ZM15.5 17C16.3284 17 17 15.8807 17 14.5C17 13.1193 16.3284 12 15.5 12C14.6716 12 14 13.1193 14 14.5C14 15.8807 14.6716 17 15.5 17Z"
+                  fill="#000000"
+                ></path>
+              </g>
+            </svg>
+            <svg
+              width="55px"
+              height="53px"
+              fill="#000000"
+              viewBox="0 0 24 24"
+              class="pointer"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g
+                id="SVGRepo_tracerCarrier"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></g>
+              <g id="SVGRepo_iconCarrier">
+                <path
+                  d="M7.826 10.083a.784.784 0 0 0-.468-.175h-.701v4.198h.701a.786.786 0 0 0 .469-.175c.155-.117.233-.292.233-.525v-2.798c.001-.233-.079-.408-.234-.525zM19.236 3H4.764C3.791 3 3.002 3.787 3 4.76v14.48c.002.973.791 1.76 1.764 1.76h14.473c.973 0 1.762-.787 1.764-1.76V4.76A1.765 1.765 0 0 0 19.236 3zM9.195 13.414c0 .755-.466 1.901-1.942 1.898H5.389V8.665h1.903c1.424 0 1.902 1.144 1.903 1.899v2.85zm4.045-3.562H11.1v1.544h1.309v1.188H11.1v1.543h2.142v1.188h-2.498a.813.813 0 0 1-.833-.792V9.497a.813.813 0 0 1 .792-.832h2.539l-.002 1.187zm4.165 4.632c-.531 1.235-1.481.99-1.906 0l-1.548-5.818h1.309l1.193 4.569 1.188-4.569h1.31l-1.546 5.818z"
+                ></path>
+              </g>
+            </svg>
+            <svg
+              width="43px"
+              height="50px"
+              fill="#000000"
+              viewBox="0 0 32 32"
+              class="pointer"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g
+                id="SVGRepo_tracerCarrier"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></g>
+              <g id="SVGRepo_iconCarrier">
+                <path
+                  d="M5.948 5.609c0.99 0.807 1.365 0.75 3.234 0.625l17.62-1.057c0.375 0 0.063-0.375-0.063-0.438l-2.927-2.115c-0.557-0.438-1.307-0.932-2.74-0.813l-17.057 1.25c-0.625 0.057-0.75 0.37-0.5 0.62zM7.005 9.719v18.536c0 0.995 0.495 1.37 1.615 1.307l19.365-1.12c1.12-0.063 1.25-0.745 1.25-1.557v-18.411c0-0.813-0.313-1.245-1-1.182l-20.234 1.182c-0.75 0.063-0.995 0.432-0.995 1.24zM26.12 10.708c0.125 0.563 0 1.12-0.563 1.188l-0.932 0.188v13.682c-0.813 0.438-1.557 0.688-2.177 0.688-1 0-1.25-0.313-1.995-1.245l-6.104-9.583v9.271l1.932 0.438c0 0 0 1.12-1.557 1.12l-4.297 0.25c-0.125-0.25 0-0.875 0.438-0.995l1.12-0.313v-12.255l-1.557-0.125c-0.125-0.563 0.188-1.37 1.057-1.432l4.609-0.313 6.354 9.708v-8.589l-1.62-0.188c-0.125-0.682 0.37-1.182 0.995-1.24zM2.583 1.38l17.745-1.307c2.177-0.188 2.74-0.063 4.109 0.932l5.667 3.984c0.932 0.682 1.245 0.87 1.245 1.615v21.839c0 1.37-0.5 2.177-2.24 2.302l-20.615 1.245c-1.302 0.063-1.927-0.125-2.615-0.995l-4.172-5.417c-0.745-0.995-1.057-1.74-1.057-2.609v-19.411c0-1.12 0.5-2.052 1.932-2.177z"
+                ></path>
+              </g>
+            </svg>
+        </div>
+      </div>
+      <div class="w-[35px] h-[35px] left-[321px] top-[574px] absolute">
+        <div class="w-[35px] h-[35px] left-0 top-0 absolute"></div>
+      </div>
+      <div class="w-[35px] h-[35px] left-[241px] top-[574px] absolute"></div>
+      <div class="w-[35px] h-[35px] left-[161px] top-[574px] absolute"></div>
+      <div class="w-[33.58px] h-[35px] left-[82px] top-[574px] absolute"></div>
+      <div
+        class="w-[450px] h-[0px] left-0 top-[54px] absolute border-4 border-black"
+      ></div>
+    </div>
+    <div
+      class="w-[450px] h-[58px] left-0 top-0 absolute bg-[#F1EBDD] rounded-[14px] border-4 border-black"
+    >
+      <img
+        class="w-[25px] h-[25px] left-[16px] top-[13px] absolute"
+        src="/static/mysite/circle.png"
+      />
+      <img
+        class="w-[25px] h-[25px] left-[50px] top-[13px] absolute"
+        src="/static/mysite/circle.png"
+      />
+    </div>
+  </div>
+</div>
 {% endblock content %}
-
-
-
-
