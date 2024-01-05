@@ -18,5 +18,9 @@ def hello():
 def home():
     return render_template("home.html",time=current_time, date=current_date)
 
+@app.route("/about")
+def about():
+    return render_template("about.html",time=current_time, data=current_date)
+
 if __name__ == "__main__":
     app.run(debug=True)
