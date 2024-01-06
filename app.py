@@ -1,7 +1,9 @@
 from flask import Flask, render_template
+from flask_mail import Mail
 import datetime
 
 app = Flask(__name__)
+
 
 now = datetime.datetime.now()
 current_time = now.strftime(" %I:%M %p")
