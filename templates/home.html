@@ -7,20 +7,19 @@
       class="w-[450px] h-[749px] left-0 top-[-1px] absolute scale-50 md:scale-75"
     >
       <img
-        class="w-[450px] h-[749px] left-0 top-0 absolute rounded-[14px] border-4 border-black"
+        class="w-[450px] h-[749px] left-0 top-0 absolute rounded-[14px] border-4 border-black drop-shadow-[12px_10px_0px_rgba(0,0,0,1)]w"
         src="/static/mysite/bg.png"
       />
-      <div
-        class="w-[450px] h-[58px] left-0 top-0 absolute bg-[#F1EBDD] rounded-[14px] border-4 border-black"
-      >
-        <img
-          class="w-[25px] h-[25px] left-[16px] top-[13px] absolute"
-          src="/static/mysite/circle.png"
-        />
-        <img
-          class="w-[25px] h-[25px] left-[50px] top-[13px] absolute"
-          src="/static/mysite/circle.png"
-        />
+
+      <div class="w-[450px] h-[58px] left-0 top-0 absolute bg-[#F1EBDD] rounded-t-[14px] border-4 border-black">
+          <div class="relative group">
+          <img class="w-[25px] h-[25px] left-[16px] top-[13px] absolute hover:hidden" src="/static/mysite/circle.png" />
+          <img class="w-[25px] h-[25px] left-[16px] top-[13px] absolute hidden group-hover:flex" src="/static/mysite/close_hover.png" />
+        </div>
+        <div class="relative group">
+          <img class="w-[25px] h-[25px] left-[50px] top-[13px] absolute hover:hidden" src="/static/mysite/circle.png" />
+          <img class="w-[25px] h-[25px] left-[50px] top-[13px] absolute hidden group-hover:flex" src="/static/mysite/floating_hover.png" />
+        </div>
       </div>
 
       <div class="flex flex-col justify-center items-center gap-y-20 mt-20">
