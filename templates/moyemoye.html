@@ -152,6 +152,8 @@
       </div>
     </nav>
 
+    
+
     <div
       class="bg-image absolute top-0 left-0 right-0 w-full h-full bg-cover bg-center z-0"
       style="background-image: url('/static/mysite/bg.png')"
@@ -160,7 +162,19 @@
     <div class="flex">
       <div
         class="w-11/12 h-screen fixed top-14 left-0 text-neutral-800"
-      >
+      > 
+        {% with messages = get_flashed_messages(with_categories=true) %} {% if
+        messages %} {% for category,message in messages %}
+        <div class="flex items-center justify-center">
+          {% if category == 'success' %}
+          <div class="pointer absolute top-4 text-center p-2 text-stone-900 text-sm font-bold font-['Roboto Mono'] bg-[#F1EBDD] rounded-[14px] drop-shadow-[7px_7px_0px_rgba(0,0,0,1)] shadow border-4 border-black">{{ message }}</div>
+          {% elif category == 'info' %}
+          <div class="pointer absolute top-4 text-center p-2 text-stone-900 text-sm font-bold font-['Roboto Mono'] bg-[#F1EBDD] rounded-[14px] drop-shadow-[7px_7px_0px_rgba(0,0,0,1)] shadow border-4 border-black">{{ message }}</div>
+          {% else %}
+          <div class="pointer absolute top-4 text-center p-2 text-stone-900 text-sm font-bold font-['Roboto Mono'] bg-[#F1EBDD] rounded-[14px] drop-shadow-[7px_7px_0px_rgba(0,0,0,1)] shadow border-4 border-black">{{ message }}</div>
+          {% endif %}
+        </div>
+        {% endfor %} {% endif %} {% endwith %}
         {% block content %}
         {% endblock content%}
       </div>
