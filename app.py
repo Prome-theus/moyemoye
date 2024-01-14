@@ -1,7 +1,8 @@
 import datetime
 from flask import Flask, render_template, redirect, url_for, flash
+from flask_sqlalchemy import SQLAlchemy
 from flask_mail import Mail, Message
-from flask_sqlalchemy import Bcrypt
+# from flask_sqlalchemy import Bcrypt
 from flask_login import LoginManager
 
 from forms import HiremeForm
@@ -9,6 +10,7 @@ from forms import HiremeForm
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///market.db'
 app.config['SECRET_KEY'] = '6e6cf3f875a3a73830d88caf'
+app.config['FLASK_ADMIN_SWATCH'] = 'cerulean'
 
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 587
@@ -18,17 +20,18 @@ app.config['MAIL_PASSWORD'] = 'omyb xpzn oeok mdqy'
 app.config['MAIL_DEFAULT_SENDER'] = 'rockbottom0111@gmail.com'
 
 db = SQLAlchemy(app)
-bcrypt = Bcrypt(app)
+# bcrypt = Bcrypt(app)
 login_manager =  LoginManager(app)
-###login.view
+###login_manager.login_view = 'login'
 ###loginmessagecategory
+admin = Admin(app, name='MyBlog', template_mode='bootstrap3')
 
 mail = Mail(app)
 
 class blog(db.Model):
-    id = db.Column(db.Integer(), primary_key=True)
-    title = db.Column(db.String(length=200), nullable=False, unique=True)
-    description = db.Column(db.String(length=1024), nullable=False, Unique=False)
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(length=200), nullable=False)
+    content = db.Column(db.Text, nullable=False, unique=False)
     image = db.Column(db.String(length=1024), nullable=False, unique=False)
 
 
@@ -41,6 +44,10 @@ current_date = now.strftime("%a %b %d ")
 def hello():
     return render_template("moyemoye.html",time=current_time, date=current_date)
 
+@app.route("/admin")
+@login_required
+def admin():
+    
 
 @app.route("/home")
 def home():
