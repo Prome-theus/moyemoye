@@ -26,7 +26,10 @@ login_manager =  LoginManager(app)
 mail = Mail(app)
 
 class blog(db.Model):
-    
+    id = db.Column(db.Integer(), primary_key=True)
+    title = db.Column(db.String(length=200), nullable=False, unique=True)
+    description = db.Column(db.String(length=1024), nullable=False, Unique=False)
+    image = db.Column(db.String(length=1024), nullable=False, unique=False)
 
 
 now = datetime.datetime.now()
