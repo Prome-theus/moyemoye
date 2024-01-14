@@ -2,8 +2,9 @@ import datetime
 from flask import Flask, render_template, redirect, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
 from flask_mail import Mail, Message
-# from flask_sqlalchemy import Bcrypt
-from flask_login import LoginManager
+from flask_admin import Admin
+from flask_admin.contrib.sqla import ModelView
+from flask_login import LoginManager, login_required
 
 from forms import HiremeForm
 
@@ -20,53 +21,50 @@ app.config['MAIL_PASSWORD'] = 'omyb xpzn oeok mdqy'
 app.config['MAIL_DEFAULT_SENDER'] = 'rockbottom0111@gmail.com'
 
 db = SQLAlchemy(app)
-# bcrypt = Bcrypt(app)
-login_manager =  LoginManager(app)
-###login_manager.login_view = 'login'
-###loginmessagecategory
+login_manager = LoginManager(app)
 admin = Admin(app, name='MyBlog', template_mode='bootstrap3')
-
 mail = Mail(app)
 
-class blog(db.Model):
+class Blog(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(length=200), nullable=False)
     content = db.Column(db.Text, nullable=False, unique=False)
     image = db.Column(db.String(length=1024), nullable=False, unique=False)
 
+@login_manager.user_loader
+def load_user(user_id):
+    # Implement this function if you are using Flask-Login and have a user model
+    pass
+
+admin.add_view(ModelView(Blog, db.session))
 
 now = datetime.datetime.now()
 current_time = now.strftime(" %I:%M %p")
 current_date = now.strftime("%a %b %d ")
 
-
 @app.route("/")
 def hello():
-    return render_template("moyemoye.html",time=current_time, date=current_date)
+    return render_template("moyemoye.html", time=current_time, date=current_date)
 
 @app.route("/admin")
 @login_required
 def admin():
-    
+    return render_template("moye.html")
 
 @app.route("/home")
 def home():
-    return render_template("home.html",time=current_time, date=current_date)
+    return render_template("home.html", time=current_time, date=current_date)
 
 @app.route("/about")
 def about():
-    return render_template("about.html",time=current_time, date=current_date)
+    return render_template("about.html", time=current_time, date=current_date)
 
 @app.route("/blog")
 def blog():
-    # page = request.args.get('page', 1, type=int)
-    # item_per_page = 6
-    # pagination = Item.query.paginate(per_page=item_per_page)
-    # items = pagination.items
-    # return render_template("blog.html", time=current_time, date=current_date, items=items, pagination=pagination)
-    return render_template("blog.html", time=current_time, date=current_date)
+    posts = Blog.query.all()
+    return render_template("blog.html", time=current_time, date=current_date, posts=posts)
 
-@app.route("/hireme",methods=['GET', 'POST'])
+@app.route("/hireme", methods=['GET', 'POST'])
 def hireme():
     form = HiremeForm()
     if form.validate_on_submit():
@@ -79,16 +77,13 @@ def hireme():
         mail.send(msg)
 
         print(f'{sname} from {semail} said {smsg}')
-        flash(f'msg sent successfully', category="success")
+        flash('Message sent successfully', category="success")
 
         return redirect(url_for('about'))
 
-    if form.errors != {}:
-        for err_msg in form.errors.values():
-            flash(f'please enter the correct details', category="danger")
-            pass
-        return redirect(url_for('hireme'))
-            
+    if form.errors:
+        flash('Please enter the correct details', category="danger")
+
     return render_template("hireme.html", time=current_time, date=current_date, form=form)
 
 if __name__ == "__main__":
