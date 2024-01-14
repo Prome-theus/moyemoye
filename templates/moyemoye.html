@@ -76,7 +76,7 @@
                 </div>
                 <a href="{{url_for('home')}}" class="pointer text-black hover:underline">Home</a>
                 <a href="{{url_for('about')}}" class="pointer text-black hover:underline">About</a>
-                <a href="#" class="pointer text-black hover:underline">Blog</a>
+                <a href="{{url_for('blog')}}" class="pointer text-black hover:underline">Blog</a>
                 <a href="#" class="pointer text-black hover:underline">Projects</a>
               </div>
             </div>
@@ -186,8 +186,8 @@
         <div
           class="topsidebar h-4/6 space-y-2 flex flex-col items-center justify-start"
         >
-          <div
-            class="w-[75px] h-[105px] scale-50 md:scale-75 space-y-2 mt-4 relative"
+          <a href="{{url_for('hello')}}"
+            class="w-[75px] h-[105px] scale-50 md:scale-75 space-y-2 mt-4 relative pointer"
           >
             <img
               class="pointer w-[73px] h-[73px] left-0 top-0 absolute"
@@ -198,10 +198,10 @@
             >
               Desktop
             </div>
-          </div>
+          </a>
 
-          <div
-            class="w-[94px] h-[105px] scale-50 md:scale-75 space-y-2 relative"
+          <a
+            class="w-[94px] h-[105px] scale-50 md:scale-75 space-y-2 relative pointer"
           >
             <img
               class="pointer w-[81px] h-[73px] left-[5px] top-0 absolute"
@@ -212,7 +212,7 @@
             >
               Downloads
             </div>
-          </div>
+          </a>
 
           <div
             class="w-[87px] h-[105px] scale-50 md:scale-75 space-y-2 relative"

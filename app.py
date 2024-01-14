@@ -1,23 +1,37 @@
 import datetime
 from flask import Flask, render_template, redirect, url_for, flash
-from flask_mail import Mail
+from flask_mail import Mail, Message
+from flask_sqlalchemy import Bcrypt
+from flask_login import LoginManager
+
 from forms import HiremeForm
 
 app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///market.db'
 app.config['SECRET_KEY'] = '6e6cf3f875a3a73830d88caf'
+
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USE_SSL'] = False
-app.config['MAIL_USERNAME'] = 'bond.james9911@gmail.com'
-app.config['MAIL_PASSWORD'] = ''
+app.config['MAIL_USERNAME'] = 'rockbottom0111@gmail.com'
+app.config['MAIL_PASSWORD'] = 'omyb xpzn oeok mdqy'
+app.config['MAIL_DEFAULT_SENDER'] = 'rockbottom0111@gmail.com'
+
+db = SQLAlchemy(app)
+bcrypt = Bcrypt(app)
+login_manager =  LoginManager(app)
+###login.view
+###loginmessagecategory
 
 mail = Mail(app)
+
+class blog(db.Model):
+    
+
 
 now = datetime.datetime.now()
 current_time = now.strftime(" %I:%M %p")
 current_date = now.strftime("%a %b %d ")
-
 
 
 @app.route("/")
@@ -32,6 +46,15 @@ def home():
 @app.route("/about")
 def about():
     return render_template("about.html",time=current_time, date=current_date)
+
+@app.route("/blog")
+def blog():
+    # page = request.args.get('page', 1, type=int)
+    # item_per_page = 6
+    # pagination = Item.query.paginate(per_page=item_per_page)
+    # items = pagination.items
+    # return render_template("blog.html", time=current_time, date=current_date, items=items, pagination=pagination)
+    return render_template("blog.html", time=current_time, date=current_date)
 
 @app.route("/hireme",methods=['GET', 'POST'])
 def hireme():
