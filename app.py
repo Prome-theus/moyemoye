@@ -1,22 +1,28 @@
 import datetime
+import requests
 from flask import Flask, render_template, redirect, url_for, flash
-from flask_pymongo import PyMongo
-from flask_mongoengine import MongoEngine
+# from flask_pymongo import PyMongo
+# from flask_mongoengine import MongoEngine
 from flask_mail import Mail, Message
-from flask_admin import Admin
-from flask_admin.contrib.pymongo import ModelView
-from flask_login import LoginManager, login_required
+# from flask_admin import Admin
+# from flask_admin.contrib.pymongo import ModelView
+# from flask_login import LoginManager, login_required
 
 from forms import HiremeForm
 
 app = Flask(__name__)
+
+app.config['NOTION_API_KEY'] = "secret_JWOHlDkr92kgzI5eXLqNK90SuSEpWeU8uasvdDf8cyo"
+NOTION_API_KEY = "secret_JWOHlDkr92kgzI5eXLqNK90SuSEpWeU8uasvdDf8cyo"
+app.config['DATABASE_ID'] = "076ee42772584168aac60bd2b8366ce6" 
+DATABASE_ID= "076ee42772584168aac60bd2b8366ce6" 
 # app.config['MONGO_URI'] = 'mongodb+srv://rockbottom0111:0iGRT5lPNMLIRskC@cluster0.lmyxnuh.mongodb.net/local'
 app.config['SECRET_KEY'] = '6e6cf3f875a3a73830d88caf'
-app.config['FLASK_ADMIN_SWATCH'] = 'cerulean'
-app.config['MONGODB_SETTINGS'] = {
-    'db': 'local',
-    'host': 'mongodb+srv://rockbottom0111:0iGRT5lPNMLIRskC@cluster0.lmyxnuh.mongodb.net/'
-}
+# app.config['FLASK_ADMIN_SWATCH'] = 'cerulean'
+# app.config['MONGODB_SETTINGS'] = {
+#     'db': 'local',
+#     'host': 'mongodb+srv://rockbottom0111:0iGRT5lPNMLIRskC@cluster0.lmyxnuh.mongodb.net/'
+# }
 
 # Mail config
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
@@ -27,27 +33,37 @@ app.config['MAIL_PASSWORD'] = 'omyb xpzn oeok mdqy'
 app.config['MAIL_DEFAULT_SENDER'] = 'rockbottom0111@gmail.com'
 
 # mongo = PyMongo(app)
-mongo = MongoEngine(app)
-login_manager = LoginManager(app)
-admin = Admin(app, name='MyBlog', template_mode='bootstrap3')
+# mongo = MongoEngine(app)
+# login_manager = LoginManager(app)
+# admin = Admin(app, name='MyBlog', template_mode='bootstrap3')
 mail = Mail(app)
 
+def fetch_notion_data():
+    url = f'https://api.notion.com/v1/databases/{DATABASE_ID}/query'
+    headers = {
+        'Authorization': f'Bearer {NOTION_API_KEY}',
+        'Content-Type': 'application/json',
+        'Notion-Version': '2021-08-16',
+    }
+    response = requests.post(url, headers=headers)
+    data = response.json()
+    return data.get('results',[])
 
-class Blog(mongo.Document):
-    title = mongo.StringField(max_length=200, required=True)
-    content = mongo.StringField(required=True)
-    image = mongo.StringField(max_length=1024, required=True)
+# class Blog(mongo.Document):
+#     title = mongo.StringField(max_length=200, required=True)
+#     content = mongo.StringField(required=True)
+#     image = mongo.StringField(max_length=1024, required=True)
 
-@login_manager.user_loader
-def load_user(user_id):
-    # Implement this function if you are using Flask-Login and have a user model
-    pass
+# @login_manager.user_loader
+# def load_user(user_id):
+#     # Implement this function if you are using Flask-Login and have a user model
+#     pass
 
-class BlogView(ModelView):
-    # Customize if needed
-    pass
+# class BlogView(ModelView):
+#     # Customize if needed
+#     pass
 
-admin.add_view(BlogView(Blog, mongo.db))
+# admin.add_view(BlogView(Blog, mongo.db))
 
 now = datetime.datetime.now()
 current_time = now.strftime(" %I:%M %p")
@@ -57,10 +73,10 @@ current_date = now.strftime("%a %b %d ")
 def hello():
     return render_template("moyemoye.html", time=current_time, date=current_date)
 
-@app.route("/admin")
-@login_required
-def admin():
-    return render_template("moye.html")
+# @app.route("/admin")
+# @login_required
+# def admin():
+#     return render_template("moye.html")
 
 @app.route("/home")
 def home():
@@ -70,10 +86,15 @@ def home():
 def about():
     return render_template("about.html", time=current_time, date=current_date)
 
+# @app.route("/blog")
+# def blog():
+#     posts = Blog.objects.all()
+#     return render_template("blog.html", time=current_time, date=current_date, posts=posts)
+
 @app.route("/blog")
 def blog():
-    posts = Blog.objects.all()
-    return render_template("blog.html", time=current_time, date=current_date, posts=posts)
+    notion_data = fetch_notion_data()
+    return render_template('blog.html', notion_data=notion_data)
 
 @app.route("/hireme", methods=['GET', 'POST'])
 def hireme():
