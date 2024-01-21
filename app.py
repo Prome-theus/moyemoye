@@ -1,6 +1,6 @@
 import datetime
 import requests
-from flask import Flask, render_template, redirect, url_for, flash
+from flask import Flask, render_template, redirect, url_for, flash, request
 # from flask_pymongo import PyMongo
 # from flask_mongoengine import MongoEngine
 from flask_mail import Mail, Message
@@ -47,7 +47,24 @@ def fetch_notion_data():
     }
     response = requests.post(url, headers=headers)
     data = response.json()
+    
+    for entry in data.get('results', []):
+        cover_image_url = entry.get('properties', {}).get('ling', {}).get('url', {})
+        print(f"Cover Image URL: {cover_image_url}")
+
     return data.get('results',[])
+
+def get_entries_for_page(page, per_page):
+    entries = fetch_notion_data()
+    start_index = (page - 1) * per_page
+    end_index = start_index + per_page
+    # print(entries[start_index:end_index]) 
+    return entries[start_index:end_index]
+
+def has_next_page(page, per_page):
+    entries = fetch_notion_data()
+    start_index = page * per_page
+    return start_index < len(entries)
 
 # class Blog(mongo.Document):
 #     title = mongo.StringField(max_length=200, required=True)
@@ -78,6 +95,13 @@ def hello():
 # def admin():
 #     return render_template("moye.html")
 
+@app.route("/blog")
+def blog():
+    page = request.args.get('page', default=1, type=int)
+    per_page = 5
+    entries = get_entries_for_page(page, per_page)
+    return render_template('blog.html', entries=entries, page=page, per_page=per_page, has_next_page=has_next_page(page, per_page))
+
 @app.route("/home")
 def home():
     return render_template("home.html", time=current_time, date=current_date)
@@ -88,13 +112,8 @@ def about():
 
 # @app.route("/blog")
 # def blog():
-#     posts = Blog.objects.all()
+    #     posts = Blog.objects.all()
 #     return render_template("blog.html", time=current_time, date=current_date, posts=posts)
-
-@app.route("/blog")
-def blog():
-    notion_data = fetch_notion_data()
-    return render_template('blog.html', notion_data=notion_data)
 
 @app.route("/hireme", methods=['GET', 'POST'])
 def hireme():
