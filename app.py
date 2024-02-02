@@ -1,9 +1,10 @@
 import datetime
 import requests
-from flask import Flask, render_template, redirect, url_for, flash, request
+from flask import Flask, render_template, redirect, url_for, flash, request, abort
 # from flask_pymongo import PyMongo
 # from flask_mongoengine import MongoEngine
 from flask_mail import Mail, Message
+from urllib.parse import quote
 # from flask_admin import Admin
 # from flask_admin.contrib.pymongo import ModelView
 # from flask_login import LoginManager, login_required
@@ -48,9 +49,10 @@ def fetch_notion_data():
     response = requests.post(url, headers=headers)
     data = response.json()
     
-    for entry in data.get('results', []):
-        cover_image_url = entry.get('properties', {}).get('ling', {}).get('url', {})
-        print(f"Cover Image URL: {cover_image_url}")
+    # for entry in data.get('results', []):
+    #     cover_image_url = entry.get('properties', {}).get('CoverImage', {}).get('files', [{}])[0].get('url')
+    #     # {{ entry['properties']['coverimg']['files'][0]['url'] }}
+    #     print(f"Cover Image URL: {cover_image_url}")
 
     return data.get('results',[])
 
@@ -58,7 +60,7 @@ def get_entries_for_page(page, per_page):
     entries = fetch_notion_data()
     start_index = (page - 1) * per_page
     end_index = start_index + per_page
-    # print(entries[start_index:end_index]) 
+    print(entries[start_index]) 
     return entries[start_index:end_index]
 
 def has_next_page(page, per_page):
@@ -101,6 +103,19 @@ def blog():
     per_page = 5
     entries = get_entries_for_page(page, per_page)
     return render_template('blog.html', entries=entries, page=page, per_page=per_page, has_next_page=has_next_page(page, per_page))
+
+@app.route('/blog/<slug>')
+def blog_detail(slug):
+    entries = fetch_notion_data()
+    
+    # Find the entry with the matching slug
+    selected_entry = next((entry for entry in entries if entry.get('slug') == slug), None)
+    
+    if not selected_entry:
+        abort(404)  # Return a 404 error if the entry with the specified slug is not found
+    
+    return render_template('blog_detail.html', entry=selected_entry)
+
 
 @app.route("/home")
 def home():
