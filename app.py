@@ -100,7 +100,7 @@ def hello():
 @app.route("/blog")
 def blog():
     page = request.args.get('page', default=1, type=int)
-    per_page = 5
+    per_page = 2
     entries = get_entries_for_page(page, per_page)
     return render_template('blog.html', entries=entries, page=page, per_page=per_page, has_next_page=has_next_page(page, per_page), time=current_time, date=current_date)
 

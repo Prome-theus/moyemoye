@@ -43,9 +43,8 @@
         </div>
       </div>
     </div>
-    <div class="w-[1087px] h-[161px] left-[58px] top-[362px] absolute"></div>
-
-    {% for entry in entries %}
+    <div class="w-[1087px] h-[161px] left-[58px] top-[200px] absolute scale-75">
+      {% for entry in entries %}
     <div class="mb-8 bg-white p-6 rounded-lg shadow-md flex">
       <div class="flex-1">
         <h2 class="text-2xl font-semibold mb-4">
@@ -67,6 +66,9 @@
     </div>
   
     {% endfor %}
+    </div>
+
+    
     
   </div>
 
@@ -86,6 +88,24 @@
       1
     </div>
   </div>
+
+  <div class="w-[380px] h-[92px] left-[412px] top-[588px] absolute bg-[#F1EBDD] rounded-[14px] shadow border-4 border-black">
+    <div class="absolute text-center text-stone-900 font-bold font-['Roboto Mono'] leading-3 tracking-wider">
+    {% if page > 1 %}
+    <a
+      href="{{ url_for('blog', page=page-1) }}"
+      class="bg-blue-500 text-white px-4 py-2 rounded-md justify-center items-center"
+      >Previous Page</a
+    >
+    {% endif %} {% if has_next_page %}
+    <a
+      href="{{ url_for('blog', page=page+1) }}"
+      class="bg-blue-500 text-white px-4 py-2 rounded-md ml-2 justify-center items-center"
+      >Next Page</a
+    >
+    {% endif %}
+  </div>
+</div>
 
   
 </div>
