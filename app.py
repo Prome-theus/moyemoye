@@ -96,6 +96,9 @@ def hello():
 # @login_required
 # def admin():
 #     return render_template("moye.html")
+@app.route("/blog1")
+def moi():
+    return render_template('blog1.html')
 
 @app.route("/blog")
 def blog():
