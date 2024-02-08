@@ -98,14 +98,14 @@ def hello():
 #     return render_template("moye.html")
 @app.route("/blog1")
 def moi():
-    return render_template('blog1.html')
+    return render_template('material1.html')
 
 @app.route("/blog")
 def blog():
     page = request.args.get('page', default=1, type=int)
     per_page = 2
     entries = get_entries_for_page(page, per_page)
-    return render_template('blog.html', entries=entries, page=page, per_page=per_page, has_next_page=has_next_page(page, per_page), time=current_time, date=current_date)
+    return render_template('material.html', entries=entries, page=page, per_page=per_page, has_next_page=has_next_page(page, per_page), time=current_time, date=current_date)
 
 @app.route('/blog/<slug>')
 def blog_detail(slug):
